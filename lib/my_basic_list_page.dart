@@ -1,10 +1,8 @@
-import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/item.dart';
-import 'package:path/path.dart';
 
 class MyBasicList extends StatefulWidget{
 
@@ -25,14 +23,41 @@ class MyBasicListState extends State<MyBasicList>{
   MyBasicListState(){
     getFeed();
   }
+
   listItem(Item item){
     return new Card(
-      child: new ListTile(
-        //leading: new Image.network(item.logo),
-        title: new Text(item.title,),
-        subtitle: new Text(item.subTitle,maxLines: 2,),
-      ),
+      child:  new Container(
+          padding: new EdgeInsets.all(12.0),
+          child:new Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              item.logo!=null?
+              new Image.network(item.logo,
+                width: 80.0,
+                height: 80.0,):new Container(),
+              new Expanded(
+                  child: new Container(
+                      padding: new EdgeInsets.only(
+                        left: 8.0,
+                        right: 8.0
+                      ),
+                      child: new Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start ,
+                        children: <Widget>[
+                          new Padding(padding: new EdgeInsets.only(bottom: 6.0),
+                            child: new Text(item.title,
+                              textAlign: TextAlign.start,
+                              style: new TextStyle(fontWeight: FontWeight.bold,)
+                              ,),),
+                          new Text(item.subTitle,)
+                        ],
+                      ) ) )
+            ],
+          )),
     );
+
     return new ListTile(
       //leading: new Image.network(item.logo),
       title: new Text(item.title,),
@@ -66,7 +91,7 @@ class MyBasicListState extends State<MyBasicList>{
       setState(() {
         for (var feed in feeds) {
           items.add(new Item(
-            logo: feed['image'],
+            logo: feed['profilePic'],
             title: feed['name'],
             subTitle: feed['status'],
           ));
@@ -83,8 +108,9 @@ class MyBasicListState extends State<MyBasicList>{
           leading: new Icon(Icons.list),
           title: new Text("Basic List View"),
         ),
-        body:new Stack(
-            children: <Widget>[new ListView(
+        body: new Stack(
+            children: <Widget>[
+              new ListView(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               children:items.map((Item item){
@@ -93,7 +119,8 @@ class MyBasicListState extends State<MyBasicList>{
             ),new Center(
                 child: _load ? new Padding(padding: const EdgeInsets.all(5.0),
                   child: new Center(child: new CircularProgressIndicator()),
-                ):new Container())]
+                ):new Container()),
+            ]
         ));
   }
 }
