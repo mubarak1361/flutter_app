@@ -6,6 +6,7 @@ class WelcomePage extends StatelessWidget{
 
   WelcomePage({this.pageTitle});
 
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -16,20 +17,19 @@ class WelcomePage extends StatelessWidget{
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          new Text(
-            "Hello Welcome !!",
+          new Text(pageTitle,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.display1 ,
           ),
-          new RaisedButton(child: new Text("Go Home"),
-            onPressed: () => goHome(context),)
+          new RaisedButton(child: new Text("Go To List Page"),
+            onPressed: () => _goToList(context),)
         ],
       ),
     ));
   }
 
-  void goHome(BuildContext context){
-    Navigator.of(context).pushNamed('/home');
+  void _goToList(BuildContext context){
+    Navigator.of(context).pushNamed('/list');
   }
 
 }
