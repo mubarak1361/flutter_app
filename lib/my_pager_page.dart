@@ -31,15 +31,44 @@ class MyPagerPageState extends State<MyPagerPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(widget.title),
-        backgroundColor: Colors.red,
-      ),
-      body: new PageView(
-        children:items.map((Item item) {
-          return _itemView(item);
-        }).toList(),
-      ),);
+
+        appBar: new AppBar(
+          title: new Text(widget.title),
+          backgroundColor: Colors.red,
+        ),
+        body: new PageView(
+          children:items.map((Item item) {
+            return _itemView(item);
+          }).toList(),
+        ),
+        bottomNavigationBar: new Card(
+            color: Colors.red,
+            child:new Row(
+                children: <Widget>[
+            new Expanded(flex: 1,child: new IconButton(onPressed: (){}, icon: new Icon(Icons.add, color: Colors.white,))),
+            new Expanded(flex: 1,child: new IconButton(onPressed: (){}, icon: new Icon(Icons.location_on, color: Colors.white,))),
+            new Expanded(flex: 1,child: new IconButton(onPressed: (){}, icon: new Icon(Icons.people, color: Colors.white,))),
+          ],
+        ))
+      /*new BottomNavigationBar(
+            items: [
+              new BottomNavigationBarItem(
+                  icon: new Icon(Icons.add),
+                  title: new Text("trends")
+              ),
+              new BottomNavigationBarItem(
+                  icon: new Icon(Icons.location_on),
+                  title: new Text("feed")
+              ),
+              new BottomNavigationBarItem(
+                  icon: new Icon(Icons.people),
+                  title: new Text("community"),
+                  backgroundColor: Colors.red
+              )
+            ],
+            fixedColor: Colors.red,
+            currentIndex: 2
+        )*/);
   }
 
   _getFeed() async {
