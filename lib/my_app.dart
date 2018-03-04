@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/my_basic_list_page.dart';
+import 'package:flutter_app/my_calculator_page.dart';
 import 'package:flutter_app/my_home_page.dart';
 import 'package:flutter_app/my_pager_page.dart';
 import 'package:flutter_app/welcome_page.dart';
@@ -22,11 +23,12 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: new MyPagerPage(title: "Pager View"),//new WelcomePage(pageTitle:"Hello, Welcome !!"),
+      home: new MyCalculatorPage(),//new WelcomePage(pageTitle:"Hello, Welcome !!"),
       routes: <String,WidgetBuilder>{
         "/home":(BuildContext context)=> new MyHomePage(pageTitle: "Flutter Home Page"),
         "/welcome":(BuildContext context)=> new WelcomePage(pageTitle:"Hello, Welcome !!"),
-        "/list":(BuildContext context) => new MyBasicList()
+        "/list":(BuildContext context) => new MyBasicList(),
+        "/slide":(BuildContext context) => new MyPagerPage(title: "Pager View"),
       },
     );
   }
