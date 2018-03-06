@@ -108,6 +108,9 @@ class MyBasicListState extends State<MyBasicList> {
         appBar: new AppBar(
           leading: new Icon(Icons.list),
           title: new Text("Basic List View"),
+          actions: <Widget>[
+            new IconButton(icon: new Icon(Icons.close), onPressed: (){ Navigator.of(context).pop();})
+          ],
         ),
         body: new Stack(
             children: <Widget>[
