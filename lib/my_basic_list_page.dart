@@ -16,9 +16,11 @@ class MyBasicList extends StatefulWidget {
 }
 
 class MyBasicListState extends State<MyBasicList> {
+
   var httpClient = new HttpClient();
   static bool _load = true;
   final List<Item> items = [];
+  final key = new GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -28,7 +30,19 @@ class MyBasicListState extends State<MyBasicList> {
 
   listItem(Item item) {
     return new Card(
-      child: new Container(
+      child: new FlatButton(
+          onPressed: (){
+            key.currentState.showSnackBar(
+              new SnackBar(
+                duration: new Duration(seconds: 20),
+                content: new Text('Tapped ${item.title}'),
+                action: new SnackBarAction(
+                  label: 'OK',
+                  onPressed: () => key.currentState.hideCurrentSnackBar(),
+                ),
+              ),
+            );
+          },
           padding: const EdgeInsets.all(12.0),
           child: new Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,7 +67,8 @@ class MyBasicListState extends State<MyBasicList> {
                               textAlign: TextAlign.start,
                               style: new TextStyle(fontWeight: FontWeight.bold)
                               ,),),
-                          new Text(item.subTitle)
+                          new Text(item.subTitle,
+                          style: new TextStyle(fontWeight: FontWeight.normal),)
                         ],
                       )))
             ],
@@ -84,6 +99,7 @@ class MyBasicListState extends State<MyBasicList> {
       'api.androidhive.info', '/feed/feed.json',);
     var request = await httpClient.getUrl(uri);
     var response = await request.close();
+
     if (response.statusCode == HttpStatus.OK) {
       var json = await response.transform(UTF8.decoder).join();
      /* var data = JSON.decode(json);
@@ -107,6 +123,7 @@ class MyBasicListState extends State<MyBasicList> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+        key: key,
         appBar: new AppBar(
           leading: new Icon(Icons.list),
           title: new Text("Basic List View"),
@@ -119,6 +136,7 @@ class MyBasicListState extends State<MyBasicList> {
               new ListView(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
+                padding: new EdgeInsets.all(4.0),
                 children: items.map((Item item) {
                   return listItem(item);
                 }).toList(),
