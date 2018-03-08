@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/model/feed.dart';
 
 class MyBasicList extends StatefulWidget {
@@ -21,10 +22,12 @@ class MyBasicListState extends State<MyBasicList> {
   static bool _load = true;
   final List<Item> items = [];
   final key = new GlobalKey<ScaffoldState>();
+  static const platform = const MethodChannel('flutterapp.sample.com/battery');
 
   @override
   void initState() {
     super.initState();
+    _getBatteryLevel();
     getFeed();
   }
 
@@ -32,6 +35,7 @@ class MyBasicListState extends State<MyBasicList> {
     return new Card(
       child: new FlatButton(
           onPressed: (){
+            debugPrint('Item ${item.title} clicked');
             key.currentState.showSnackBar(
               new SnackBar(
                 duration: new Duration(seconds: 20),
@@ -75,7 +79,7 @@ class MyBasicListState extends State<MyBasicList> {
           ))
     );
 
-    return new ListTile(
+    /*return new ListTile(
       //leading: new Image.network(item.logo),
       title: new Text(item.title,),
       subtitle: new Text(item.subTitle, maxLines: 2,),
@@ -90,7 +94,16 @@ class MyBasicListState extends State<MyBasicList> {
           ),
         );
       },
-    );
+    );*/
+  }
+
+  _getBatteryLevel() async {
+    try {
+      final int result = await platform.invokeMethod('getBatteryLevel');
+      debugPrint('Battery level at $result % .');
+    } on PlatformException catch (e) {
+      debugPrint('Failed to get battery level: ${e.message}.');
+    }
   }
 
   getFeed() async {
@@ -102,8 +115,9 @@ class MyBasicListState extends State<MyBasicList> {
 
     if (response.statusCode == HttpStatus.OK) {
       var json = await response.transform(UTF8.decoder).join();
-     /* var data = JSON.decode(json);
-      var feeds = data['feed'];*/
+     var data = JSON.decode(json);
+      /*var feeds = data['feed'];*/
+     debugPrint(data.toString());
      Feed feed = new Feed.fromJson(JSON.decode(json) as Map<String,dynamic>);
 
       setState(() {

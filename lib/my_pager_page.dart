@@ -19,7 +19,6 @@ class MyPagerPage extends StatefulWidget{
 class MyPagerPageState extends State<MyPagerPage> {
 
   var httpClient = new HttpClient();
-  static bool _load = true;
   final List<Item> items = [];
 
   @override
@@ -90,7 +89,6 @@ class MyPagerPageState extends State<MyPagerPage> {
             subTitle: feed['status'],
           ));
         }
-        _load = false;
       });
     }
   }

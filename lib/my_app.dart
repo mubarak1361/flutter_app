@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/calculator_page.dart';
-import 'package:flutter_app/fragment/action_page.dart';
 import 'package:flutter_app/my_basic_list_page.dart';
-import 'package:flutter_app/my_bottom_navigation.dart';
-import 'package:flutter_app/my_calculator_page.dart';
 import 'package:flutter_app/my_home_page.dart';
 import 'package:flutter_app/my_pager_page.dart';
 import 'package:flutter_app/welcome_page.dart';

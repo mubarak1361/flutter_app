@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/my_home_page.dart';
 
 class MyHomePageState extends State<MyHomePage> {
+
   int _counter = 0;
-  final TextEditingController _controller = new TextEditingController();
 
   void _incrementCounter() {
     setState(() {
@@ -15,9 +15,6 @@ class MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
-  }
-  void _print(){
-    print('Done Pressed');
   }
 
   @override
