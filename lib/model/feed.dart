@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'feed.g.dart';
 
-/**command
-  flutter packages pub run build_runner build**/
+//Command for generate files
+//flutter packages pub run build_runner build
 
 @JsonSerializable()
 class Feed extends Object with _$FeedSerializerMixin {
