@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/my_home_page_state.dart';
 
-
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.pageTitle}) : super(key: key);
 
@@ -19,5 +18,4 @@ class MyHomePage extends StatefulWidget {
 
   @override
   MyHomePageState createState() => new MyHomePageState();
-
 }

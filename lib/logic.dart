@@ -35,10 +35,8 @@ class FloatToken extends NumberToken {
 
   static double _parse(String stringRep) {
     String toParse = stringRep;
-    if (toParse.startsWith('.'))
-      toParse = '0' + toParse;
-    if (toParse.endsWith('.'))
-      toParse = toParse + '0';
+    if (toParse.startsWith('.')) toParse = '0' + toParse;
+    if (toParse.endsWith('.')) toParse = toParse + '0';
     return double.parse(toParse);
   }
 }
@@ -51,8 +49,7 @@ class ResultToken extends NumberToken {
   /// floating point number is guaranteed to have at least this many
   /// decimal digits of precision.
   static num round(num number) {
-    if (number is int)
-      return number;
+    if (number is int) return number;
     return double.parse(number.toStringAsPrecision(14));
   }
 }
@@ -66,8 +63,7 @@ enum Operation { Addition, Subtraction, Multiplication, Division }
 
 /// A token that represents an arithmetic operation symbol.
 class OperationToken extends ExpressionToken {
-  OperationToken(this.operation)
-      : super(opString(operation));
+  OperationToken(this.operation) : super(opString(operation));
 
   Operation operation;
 
@@ -120,8 +116,7 @@ enum ExpressionState {
 class CalcExpression {
   CalcExpression(this._list, this.state);
 
-  CalcExpression.empty()
-      : this(<ExpressionToken>[], ExpressionState.Start);
+  CalcExpression.empty() : this(<ExpressionToken>[], ExpressionState.Start);
 
   CalcExpression.result(FloatToken result)
       : _list = <ExpressionToken>[],
@@ -131,6 +126,7 @@ class CalcExpression {
 
   /// The tokens comprising the expression.
   final List<ExpressionToken> _list;
+
   /// The state of the expression.
   final ExpressionState state;
 
@@ -152,11 +148,11 @@ class CalcExpression {
     final List<ExpressionToken> outList = _list.toList();
     switch (state) {
       case ExpressionState.Start:
-      // Start a new number with digit.
+        // Start a new number with digit.
         newToken = new IntToken('$digit');
         break;
       case ExpressionState.LeadingNeg:
-      // Replace the leading neg with a negative number starting with digit.
+        // Replace the leading neg with a negative number starting with digit.
         outList.removeLast();
         newToken = new IntToken('-$digit');
         break;
@@ -171,7 +167,7 @@ class CalcExpression {
         newToken = new FloatToken('${last.stringRep}$digit');
         break;
       case ExpressionState.Result:
-      // Cannot enter a number now
+        // Cannot enter a number now
         return null;
     }
     outList.add(newToken);
@@ -196,7 +192,7 @@ class CalcExpression {
       case ExpressionState.Point:
       case ExpressionState.NumberWithPoint:
       case ExpressionState.Result:
-      // Cannot enter a point now
+        // Cannot enter a point now
         return null;
     }
     outList.add(newToken);
@@ -211,7 +207,7 @@ class CalcExpression {
       case ExpressionState.Start:
       case ExpressionState.LeadingNeg:
       case ExpressionState.Point:
-      // Cannot enter operation now.
+        // Cannot enter operation now.
         return null;
       case ExpressionState.Number:
       case ExpressionState.NumberWithPoint:
@@ -235,7 +231,7 @@ class CalcExpression {
       case ExpressionState.Number:
       case ExpressionState.NumberWithPoint:
       case ExpressionState.Result:
-      // Cannot enter leading neg now.
+        // Cannot enter leading neg now.
         return null;
     }
     final List<ExpressionToken> outList = _list.toList();
@@ -272,7 +268,7 @@ class CalcExpression {
       case ExpressionState.LeadingNeg:
       case ExpressionState.Point:
       case ExpressionState.Result:
-      // Cannot compute result now.
+        // Cannot compute result now.
         return null;
       case ExpressionState.Number:
       case ExpressionState.NumberWithPoint:
@@ -298,7 +294,7 @@ class CalcExpression {
           break;
         case Operation.Multiplication:
         case Operation.Division:
-        // Logic error.
+          // Logic error.
           assert(false);
       }
     }
@@ -320,7 +316,7 @@ class CalcExpression {
       switch (nextOpToken.operation) {
         case Operation.Addition:
         case Operation.Subtraction:
-        // We have reached the end of the current term
+          // We have reached the end of the current term
           return currentValue;
         case Operation.Multiplication:
           break;

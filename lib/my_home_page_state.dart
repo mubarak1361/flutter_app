@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/my_home_page.dart';
 
 class MyHomePageState extends State<MyHomePage> {
-
   int _counter = 0;
 
   void _incrementCounter() {
@@ -60,7 +59,6 @@ class MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.display1,
             )
           ],
-
         ),
       ),
       floatingActionButton: new FloatingActionButton(

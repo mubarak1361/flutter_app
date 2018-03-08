@@ -22,12 +22,15 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: new WelcomePage(pageTitle:"Hello, Welcome !!"),
-      routes: <String,WidgetBuilder>{
-        "/home": (BuildContext context) => new MyHomePage(pageTitle: "Flutter Home Page"),
-        "/welcome":(BuildContext context)=> new WelcomePage(pageTitle:"Hello, Welcome !!"),
-        "/list":(BuildContext context) => new MyBasicList(),
-        "/slide":(BuildContext context) => new MyPagerPage(title: "Pager View"),
+      home: new WelcomePage(pageTitle: "Hello, Welcome !!"),
+      routes: <String, WidgetBuilder>{
+        "/home": (BuildContext context) =>
+            new MyHomePage(pageTitle: "Flutter Home Page"),
+        "/welcome": (BuildContext context) =>
+            new WelcomePage(pageTitle: "Hello, Welcome !!"),
+        "/list": (BuildContext context) => new MyBasicList(),
+        "/slide": (BuildContext context) =>
+            new MyPagerPage(title: "Pager View"),
       },
     );
   }

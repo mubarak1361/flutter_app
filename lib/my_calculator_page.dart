@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 
-
 class MyCalculatorPage extends StatefulWidget {
-
   @override
   _MyCalculatorPageState createState() => new _MyCalculatorPageState();
-
 }
 
-class _MyCalculatorPageState extends State<MyCalculatorPage>  {
-
+class _MyCalculatorPageState extends State<MyCalculatorPage> {
   String inputValue = '';
   String mOperator;
   String nextValue = '';
@@ -25,7 +21,6 @@ class _MyCalculatorPageState extends State<MyCalculatorPage>  {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -46,21 +41,20 @@ class _MyCalculatorPageState extends State<MyCalculatorPage>  {
             flex: 2,
             child: new Container(
               padding: new EdgeInsets.only(
-                  top: 12.0,
-                  left: 12.0,
-                  right: 12.0,
-                  bottom: 12.0),
+                  top: 12.0, left: 12.0, right: 12.0, bottom: 12.0),
               color: Colors.blue.withOpacity(0.02),
               child: new Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  new Text(inputValue,
+                  new Text(
+                    inputValue,
                     maxLines: 1,
                     style: new TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.normal,
-                        fontSize: 50.0),)
+                        fontSize: 50.0),
+                  )
                 ],
               ),
             ),
@@ -87,34 +81,38 @@ class _MyCalculatorPageState extends State<MyCalculatorPage>  {
         child: new Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: keys.map((String key) {
-              return new Expanded(flex: 1,
+              return new Expanded(
+                  flex: 1,
                   child: new Container(
                     decoration: new BoxDecoration(
                       border: new Border.all(
                           color: Colors.grey.withOpacity(0.1),
                           width: 0.5,
-                          style: BorderStyle.solid
-                      ),
+                          style: BorderStyle.solid),
                     ),
-                    child:  new FlatButton(
-                      color: key=='='?Colors.blue.withOpacity(0.7) : Colors.white,
-                      child: new Text(key,
+                    child: new FlatButton(
+                      color: key == '='
+                          ? Colors.blue.withOpacity(0.7)
+                          : Colors.white,
+                      child: new Text(
+                        key,
                         style: new TextStyle(
                           fontWeight: FontWeight.normal,
                           fontSize: 35.0,
                           color: getTextColor(key),
-                          fontStyle: FontStyle.normal,),),
+                          fontStyle: FontStyle.normal,
+                        ),
+                      ),
                       onPressed: () {
                         handleInput(key);
-                      }
-                      ,),
+                      },
+                    ),
                   ));
             }).toList()));
-
   }
 
-  Color getTextColor(String key){
-    switch(key){
+  Color getTextColor(String key) {
+    switch (key) {
       case 'C':
         return Colors.red;
       case '( )':
@@ -130,7 +128,6 @@ class _MyCalculatorPageState extends State<MyCalculatorPage>  {
         return Colors.black54;
     }
   }
-
 
   void handleInput(String key) {
     if (isNumeric(key)) {
@@ -195,5 +192,4 @@ class _MyCalculatorPageState extends State<MyCalculatorPage>  {
         break;
     }
   }
-
 }

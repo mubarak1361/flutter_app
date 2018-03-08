@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-class PageData{
-
+class PageData {
   final String name;
   final IconData iconData;
 
-  PageData(this.name,this.iconData);
-
+  PageData(this.name, this.iconData);
 }
