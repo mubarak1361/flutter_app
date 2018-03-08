@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model/item.dart';
+import 'package:flutter_app/model/feed.dart';
 
 class MyBasicList extends StatefulWidget {
 
@@ -86,17 +86,19 @@ class MyBasicListState extends State<MyBasicList> {
     var response = await request.close();
     if (response.statusCode == HttpStatus.OK) {
       var json = await response.transform(UTF8.decoder).join();
-      var data = JSON.decode(json);
-      var feeds = data['feed'];
+     /* var data = JSON.decode(json);
+      var feeds = data['feed'];*/
+     Feed feed = new Feed.fromJson(JSON.decode(json) as Map<String,dynamic>);
 
       setState(() {
-        for (var feed in feeds) {
+        /*for (var feed in feeds) {
           items.add(new Item(
             logo: feed['profilePic'],
             title: feed['name'],
             subTitle: feed['status'],
           ));
-        }
+        }*/
+        items.addAll(feed.items);
         _load = false;
       });
     }

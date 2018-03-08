@@ -37,7 +37,6 @@ class _MyBottonNavigationState extends State<MyBottomNavigation>{
         children: <Widget>[
           new Expanded(flex: 9, child: _getPage(_selectedPage)),
           new Expanded(flex: 1,child: new Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: _items.map((PageData pageData){
               return new Expanded(flex: 1, child: new FlatButton(onPressed: (){
                 setState(()=> _selectedPage = _items.indexOf(pageData));

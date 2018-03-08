@@ -8,7 +8,7 @@ class MyCalculatorPage extends StatefulWidget {
 
 }
 
-class _MyCalculatorPageState extends State<MyCalculatorPage> {
+class _MyCalculatorPageState extends State<MyCalculatorPage>  {
 
   String inputValue = '';
   String mOperator;
@@ -25,6 +25,7 @@ class _MyCalculatorPageState extends State<MyCalculatorPage> {
   @override
   void initState() {
     super.initState();
+
   }
 
   @override
@@ -194,4 +195,5 @@ class _MyCalculatorPageState extends State<MyCalculatorPage> {
         break;
     }
   }
+
 }

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model/item.dart';
+import 'package:flutter_app/model/feed.dart';
 
 class MyPagerPage extends StatefulWidget{
 
