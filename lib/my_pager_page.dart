@@ -98,8 +98,8 @@ class MyPagerPageState extends State<MyPagerPage> {
     var request = await httpClient.getUrl(uri);
     var response = await request.close();
     if (response.statusCode == HttpStatus.OK) {
-      var json = await response.transform(UTF8.decoder).join();
-      var data = JSON.decode(json);
+      var jsonData = await response.transform(UTF8.decoder).join();
+      var data = json.decode(jsonData);
       var feeds = data['feed'];
 
       setState(() {

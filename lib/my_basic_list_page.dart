@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/model/feed.dart';
+import 'package:flutter_app/network_util.dart';
 
 class MyBasicList extends StatefulWidget {
   MyBasicList({Key key}) : super(key: key);
@@ -24,11 +27,25 @@ class MyBasicListState extends State<MyBasicList> {
   @override
   void initState() {
     super.initState();
+
     _getBatteryLevel();
-    getFeed();
+
+    //getFeed();
+
+    NetworkUtil().getFeed(
+        onSuccess: (feed){
+          setState(() {
+            items.addAll(feed.items);
+            _load = false;
+          });
+        },
+        onFailure: (error){
+        debugPrint(error);
+    });
+
   }
 
-  listItem(Item item) {
+  Card listItem(Item item) {
     return new Card(
         child: new FlatButton(
             onPressed: () {
@@ -105,7 +122,7 @@ class MyBasicListState extends State<MyBasicList> {
     }
   }
 
-  getFeed() async {
+ Future getFeed() async {
     var httpClient = new HttpClient();
     var uri = new Uri.http(
       'api.androidhive.info',
@@ -115,11 +132,11 @@ class MyBasicListState extends State<MyBasicList> {
     var response = await request.close();
 
     if (response.statusCode == HttpStatus.OK) {
-      var json = await response.transform(UTF8.decoder).join();
-      var data = JSON.decode(json);
+      var json = await response.transform(Utf8Decoder()).join();
+      var data = jsonDecode(json);
       /*var feeds = data['feed'];*/
       debugPrint(data.toString());
-      Feed feed = new Feed.fromJson(JSON.decode(json) as Map<String, dynamic>);
+      Feed feed = new Feed.fromJson(jsonDecode(json) as Map<String, dynamic>);
 
       setState(() {
         /*for (var feed in feeds) {
@@ -146,7 +163,7 @@ class MyBasicListState extends State<MyBasicList> {
             new IconButton(
                 icon: new Icon(Icons.close),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  SystemNavigator.pop();
                 })
           ],
         ),

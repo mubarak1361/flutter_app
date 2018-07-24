@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_app/my_home_page_state.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.pageTitle}) : super(key: key);
+  MyHomePage({Key key,@required this.pageTitle}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/form_page.dart';
 import 'package:flutter_app/my_basic_list_page.dart';
 import 'package:flutter_app/my_home_page.dart';
 import 'package:flutter_app/my_pager_page.dart';
@@ -20,17 +21,17 @@ class MyApp extends StatelessWidget {
         // "hot reload" (press "r" in the console where you ran "flutter run",
         // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
         // counter didn't reset back to zero; the application is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
-      home: new WelcomePage(pageTitle: "Hello, Welcome !!"),
+      home: new MyBasicList(),
       routes: <String, WidgetBuilder>{
         "/home": (BuildContext context) =>
-            new MyHomePage(pageTitle: "Flutter Home Page"),
+        new MyHomePage(pageTitle: "Flutter Home Page"),
         "/welcome": (BuildContext context) =>
-            new WelcomePage(pageTitle: "Hello, Welcome !!"),
+        new WelcomePage(pageTitle: "Hello, Welcome !!"),
         "/list": (BuildContext context) => new MyBasicList(),
         "/slide": (BuildContext context) =>
-            new MyPagerPage(title: "Pager View"),
+        new MyPagerPage(title: "Pager View"),
       },
     );
   }

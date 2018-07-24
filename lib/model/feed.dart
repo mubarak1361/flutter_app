@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'feed.g.dart';
 
 //Command for generate files

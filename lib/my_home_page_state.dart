@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/method.dart';
+import 'package:flutter_app/model/feed.dart';
 import 'package:flutter_app/my_home_page.dart';
+import 'package:flutter_app/network_util.dart';
 
 class MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
@@ -14,6 +17,24 @@ class MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    /*NetworkUtil().call(
+        url: 'http://api.androidhive.info/feed/feed.json',
+        method: Method.GET,
+        onSuccess: (response) {
+          var res = response as Map<String,dynamic>;
+          var feed = res['feed'] as List;
+          var title = feed[0]['name'];
+          debugPrint(title);
+          //Feed feed = new Feed.fromJson(response);
+        },
+        onFailure: (error){
+          debugPrint(error);
+        });*/
   }
 
   @override
